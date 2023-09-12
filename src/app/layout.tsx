@@ -13,6 +13,7 @@ import { Sidebar } from '@/components/sidebar'
 import { authOptions } from '@/lib/auth'
 import { AuthProvider } from '@/components/auth-provider'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/toaster'
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] })
 
@@ -65,6 +66,7 @@ export default async function RootLayout({
               </div>
             </Sheet>
             {modals}
+            <Toaster />
           </ThemeProvider>
         </AuthProvider>
       </body>
