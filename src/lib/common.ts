@@ -1,7 +1,7 @@
 export type SearchParams = { [key: string]: string | string[] | undefined }
 
-export const getLibraryTitle = (searchParams: SearchParams) => {
-  switch (searchParams.status) {
+export const getLibraryTitle = (searchParams?: SearchParams) => {
+  switch (searchParams?.status) {
     case "read":
       return {
         title: "Read",
