@@ -13,7 +13,7 @@ export interface BookCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function BookCard({ data, className, width, height, ...props }: BookCardProps) {
   return (
     <Link href={`/books/${data.id}`}>
-      <div className={cn("space-y-3", className)} {...props}>
+      <div className={cn(`space-y-3 w-[${width}px]`, className)} {...props}>
         <div className={`overflow-hidden rounded-md w-[${width}px]`}>
           <Marble
             name={data.title}
@@ -23,9 +23,11 @@ export function BookCard({ data, className, width, height, ...props }: BookCardP
             className="h-auto w-auto object-cover transition-all hover:scale-110"
           />
         </div>
-        <div className="space-y-1 text-sm">
-          <h3 className="font-medium leading-none">{data.title}</h3>
-          <p className="text-xs text-muted-foreground">{data.author}, {data.publicationYear}</p>
+        <div className="space-y-1">
+          <h3 className="font-medium leading-none line-clamp-1">
+            {data.title}
+          </h3>
+          <p className="text-sm text-muted-foreground line-clamp-1">{data.author}, {data.publicationYear}</p>
         </div>
       </div>
     </Link>

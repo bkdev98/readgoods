@@ -18,8 +18,6 @@ export default async function Home({
 
   const books = session ? (await getBooks(searchParams?.status)) : []
 
-  console.log(books)
-
   return (
     <>
       <PageTitle
@@ -44,7 +42,7 @@ export default async function Home({
         <EmptyState
           title={"No books yet"}
           description={
-            !session ? "Sign in to add a book to your library" : "You haven't added any books to your library yet."
+            !session ? "Sign in to add a book to your library" : "You haven't added any books to this shelf yet."
           }
           icon={BookTemplate}
           action={!session && <AuthButton />}

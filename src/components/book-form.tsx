@@ -74,8 +74,9 @@ export function BookForm() {
 
     form.reset()
 
-    router.refresh()
-    router.push(`/books/${book.id}`)
+    router.back()
+
+    setTimeout(() => router.push(`/books/${book.id}`), 100)
   }, [form, router])
 
   return (
