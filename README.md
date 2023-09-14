@@ -6,6 +6,13 @@ A simple personal library management system, built with [Next's App Router](http
 
 ![Screenshot](./readgoods.png)
 
+## Features
+
+- GitHub OAuth.
+- Book management.
+- [Parallel + intercepting routes](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes#modals).
+- Postgres with Prisma.
+
 ## Development
 
 Create a `.env` file from `.env.example`.
