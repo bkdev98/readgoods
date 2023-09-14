@@ -24,10 +24,10 @@ export function BookCard({ data, className, width, height, ...props }: BookCardP
           />
         </div>
         <div className="space-y-1">
-          <h3 className="font-medium leading-none line-clamp-1">
+          <h3 className="font-medium leading-none line-clamp-1 h-5">
             {data.title}
           </h3>
-          <p className="text-sm text-muted-foreground line-clamp-1">{data.author}, {data.publicationYear}</p>
+          <p className="text-sm text-muted-foreground line-clamp-2">{data.author}, {data.publicationYear}</p>
         </div>
       </div>
     </Link>
