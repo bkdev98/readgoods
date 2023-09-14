@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button";
-import { PlusCircle } from "lucide-react";
+import { Button, ButtonProps } from "@/components/ui/button";
+import { Cog, PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
@@ -22,6 +22,17 @@ export function AddBookLink() {
       <Button size='sm'>
         <PlusCircle className="w-4 h-4 mr-2" />
         Add Book
+      </Button>
+    </Link>
+  )
+}
+
+export function EditBookLink({ id, className, ...props }: { id: string } & ButtonProps) {
+  return (
+    <Link passHref href={`/edit-book/${id}`} className={className}>
+      <Button className={className} {...props}>
+        <Cog className="w-4 h-4 mr-2" />
+        Edit Book
       </Button>
     </Link>
   )

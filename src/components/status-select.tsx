@@ -10,7 +10,7 @@ import {
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button, ButtonProps } from "@/components/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -49,14 +49,15 @@ const statuses: Status[] = [
   },
 ]
 
-export type StatusSelectProps = {
-  value?: string
+export type StatusSelectProps = Omit<ButtonProps, 'value' | 'onChange'> & {
+  value?: string | null
   onChange?: (value?: string) => void
 }
 
 const StatusSelect = React.forwardRef<HTMLInputElement, StatusSelectProps>(({
   value,
   onChange,
+  ...props
 }, ref) => {
   const [open, setOpen] = React.useState(false)
 
@@ -69,7 +70,8 @@ const StatusSelect = React.forwardRef<HTMLInputElement, StatusSelectProps>(({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="w-[200px] justify-start"
+          className={cn("w-[200px] justify-start", props.className)}
+          {...props}
         >
           {selectedStatus ? (
             <>

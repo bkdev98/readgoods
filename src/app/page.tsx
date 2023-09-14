@@ -1,4 +1,4 @@
-import { AddBookLink } from '@/components/add-book-link'
+import { AddBookLink } from '@/components/book-links'
 import { AuthButton } from '@/components/auth-button'
 import { BookCard } from '@/components/book-card'
 import { EmptyState } from '@/components/empty-state'

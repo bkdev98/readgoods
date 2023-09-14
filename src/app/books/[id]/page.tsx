@@ -1,12 +1,31 @@
+import { EditBookLink } from "@/components/book-links"
 import { EmptyState } from "@/components/empty-state"
 import { Marble } from "@/components/marble"
-import { Button } from "@/components/ui/button"
-import { getLibraryTitle } from "@/lib/common"
-import { getBook } from "@/lib/services"
-import { BookTemplate, Cog, Edit2 } from "lucide-react"
+import { BookTemplate } from "lucide-react"
+import prisma from "@/lib/prisma"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
+import { SetStatusButton } from "@/components/set-status-button"
 
 export default async function BookDetail({ params }: { params: { id: string } }) {
-  const data = await getBook(params.id)
+  const session = await getServerSession(authOptions)
+
+  if (!session) {
+    return (
+      <EmptyState
+        icon={BookTemplate}
+        title='You are not signed in.'
+        description='Sign in to view your book.'
+      />
+    )
+  }
+
+  const data = await prisma.book.findUnique({
+    where: {
+      id: params.id,
+      userId: session.user.id,
+    },
+  })
 
   if (!data) {
     return (
@@ -19,7 +38,7 @@ export default async function BookDetail({ params }: { params: { id: string } })
   }
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row gap-4">
       <div className="flex flex-col w-full md:w-1/3 items-center gap-2">
         <div className="overflow-hidden rounded-md w-[250px] mb-2">
           <Marble
@@ -30,20 +49,8 @@ export default async function BookDetail({ params }: { params: { id: string } })
             className="h-auto w-auto object-cover transition-all hover:scale-110"
           />
         </div>
-        {data.status ? (
-          <Button className="w-full max-w-[250px]">
-            <Edit2 className="w-4 h-4 mr-2" />
-            {getLibraryTitle(data as any).title}
-          </Button>
-        ) : (
-          <Button className="w-full max-w-[250px]">
-            Want to Read
-          </Button>
-        )}
-        <Button className="w-full max-w-[250px]" variant='ghost'>
-          <Cog className="w-4 h-4 mr-2" />
-          Update Detail
-        </Button>
+        <SetStatusButton editingBook={data} />
+        <EditBookLink id={data.id} className="w-full max-w-[250px]" variant='ghost' />
       </div>
       <div className="flex-auto">
         <div className="space-y-3 flex flex-col gap-2">

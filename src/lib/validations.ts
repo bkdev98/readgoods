@@ -27,5 +27,7 @@ export const bookFormSchema = z.object({
     }),
   cover: z.string().optional(),
   publicationYear: z.string().optional(),
-  status: z.string().optional(),
+  status: z.string().nullable().optional(),
 })
+
+export const editBookFormSchema = bookFormSchema.partial()
